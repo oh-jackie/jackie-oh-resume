@@ -7,7 +7,7 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
+ :root {
     --bg:        #1e1a14;
     --surface:   #272118;
     --surface2:  #2f2920;
@@ -23,7 +23,7 @@
     --sand:      #c9b07a;
     --sand-lt:   #ddc994;
     --olive:     #4a5235;
-  }
+}
 
   html { scroll-behavior: smooth; }
 
@@ -501,12 +501,109 @@
   .summary-bar  { animation: fadeUp 0.55s 0.08s ease both; }
   .page         { animation: fadeUp 0.55s 0.16s ease both; }
 
-  @media (max-width: 780px) {
-    .hero-inner { grid-template-columns: 1fr; padding: 40px 24px; }
-    .photo-wrap { display: none; }
-    .summary-bar-inner { padding: 16px 24px; }
-    .page { grid-template-columns: 1fr; padding: 30px 24px 60px; gap: 40px; }
-    footer { padding: 16px 24px; flex-direction: column; gap: 4px; }
+  /* ── TABLET ── */
+  @media (max-width: 900px) {
+    .hero-inner { padding: 44px 36px 40px; gap: 28px; }
+    .photo-frame { width: 110px; height: 110px; }
+    .page { padding: 40px 36px 60px; gap: 36px; grid-template-columns: 1fr 240px; }
+    .summary-bar-inner { padding: 18px 36px; }
+    footer { padding: 20px 36px; }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    /* Hero: stack vertically with photo on top centered */
+    .hero-inner {
+      grid-template-columns: 1fr;
+      padding: 32px 20px 28px;
+      gap: 0;
+      text-align: center;
+    }
+
+    /* Show photo on mobile, centered above the name */
+    .photo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      order: -1;
+    }
+
+    .photo-frame { width: 96px; height: 96px; border-radius: 50%; }
+    .photo-upload-btn { bottom: -4px; right: calc(50% - 60px); }
+
+    .eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-name { font-size: 48px; }
+
+    .hero-subtitle {
+      font-size: 13px;
+      margin: 10px auto 0;
+      max-width: 320px;
+    }
+
+    /* Contact pills: centered, wrap naturally */
+    .hero-contact {
+      justify-content: center;
+      margin-top: 18px;
+      gap: 6px;
+    }
+
+    .contact-pill { font-size: 11px; padding: 5px 11px; }
+
+    /* Summary bar */
+    .summary-bar-inner {
+      padding: 14px 20px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* Main page: single column, tighter padding */
+    .page {
+      grid-template-columns: 1fr;
+      padding: 24px 16px 48px;
+      gap: 32px;
+    }
+
+    /* Job cards: slightly tighter on small screens */
+    .job-trigger { padding: 14px 14px; gap: 10px; }
+    .co-logo { width: 36px; height: 36px; font-size: 11px; }
+    .co-name { font-size: 14px; }
+    .co-role { font-size: 11px; }
+    .co-dates { font-size: 10px; }
+    .job-body-inner { padding: 14px 14px 16px; }
+    .bullets li { font-size: 12.5px; }
+
+    /* Metrics: 2 columns stays fine, just tighten */
+    .metric-num { font-size: 24px; }
+    .metric-label { font-size: 10px; }
+
+    /* Tags wrap fine already, just shrink slightly */
+    .tag { font-size: 11px; padding: 4px 10px; }
+
+    /* Program cards */
+    .program-card { padding: 12px 14px; }
+    .program-name { font-size: 12.5px; }
+    .program-desc { font-size: 11.5px; }
+
+    /* Section labels */
+    .section-label { font-size: 9.5px; margin-bottom: 16px; }
+
+    footer {
+      padding: 16px 20px;
+      flex-direction: column;
+      gap: 4px;
+      text-align: center;
+    }
+  }
+
+  /* ── VERY SMALL (iPhone SE etc) ── */
+  @media (max-width: 380px) {
+    .hero-name { font-size: 40px; }
+    .contact-pill { font-size: 10.5px; padding: 5px 9px; }
+    .page { padding: 20px 14px 40px; }
   }
 </style>
 </head>
@@ -539,7 +636,8 @@
     </div>
 
     <div class="photo-wrap">
-      <div class="photo-frame" id="photo-frame">
+      <div class="photo-frame" id="photo-frame" onclick="document.getElementById('photo-input').click()">
+        <div class="photo-frame" id="photo-frame">
   <img src="headshot.jpeg" alt="Jackie Oh">
 </div>
       <button class="photo-upload-btn" onclick="document.getElementById('photo-input').click()" title="Upload photo">
